@@ -20,9 +20,9 @@ import {
 } from "../components";
 
 import {
-  encodeImageFileAsURL,
   reactValidator,
   sectionChoosor,
+  handleDynamicOnChange,
 } from "../utils/helpers/helpers";
 
 import config from "../services/redux/services/config.json";
@@ -194,38 +194,26 @@ const Sections = () => {
         [event.target.name]: event.target.files[0],
       });
     } else if (sectionName === "services") {
-      const newSectionData = { ...sectionData };
-      if (event.target.id === "serviceIcon") {
-        encodeImageFileAsURL(event.target.files[0])
-          .then(
-            (res) =>
-              (newSectionData.servicesItem[index][event.target.name] = res)
-          )
-          .catch((err) => console.log(err));
-      } else {
-        newSectionData.servicesItem[index][event.target.name] =
-          event.target.value;
-      }
       setSectionData({
         ...sectionData,
-        servicesItem: newSectionData.servicesItem,
+        servicesItem: handleDynamicOnChange(
+          sectionData,
+          event,
+          index,
+          "servicesItem",
+          "serviceIcon"
+        ),
       });
     } else if (sectionName === "teams") {
-      const newSectionData = { ...sectionData };
-      if (event.target.id === "customerIcon") {
-        encodeImageFileAsURL(event.target.files[0])
-          .then(
-            (res) =>
-              (newSectionData.customerItem[index][event.target.name] = res)
-          )
-          .catch((err) => console.log(err));
-      } else {
-        newSectionData.customerItem[index][event.target.name] =
-          event.target.value;
-      }
       setSectionData({
         ...sectionData,
-        customerItem: newSectionData.customerItem,
+        customerItem: handleDynamicOnChange(
+          sectionData,
+          event,
+          index,
+          "customerItem",
+          "customerIcon"
+        ),
       });
     } else {
       setSectionData({
@@ -235,6 +223,7 @@ const Sections = () => {
     }
   };
 
+  console.log(sectionData);
   // create new sections
 
   const handleSubmit = (event) => {

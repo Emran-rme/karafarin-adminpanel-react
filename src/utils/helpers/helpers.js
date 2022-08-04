@@ -85,6 +85,30 @@ export const translateSectinType = (type) => {
   }
 };
 
+/*
+ * parameters:
+ * 1- props[0]: sectionData
+ * 2-props[1]: event,
+ * 3-props[2]: index
+ * 4-props[3]: itemName
+ * 5-props[4]: inputName
+ */
+export const handleDynamicOnChange = (...props) => {
+  const newSectionData = { ...props[0] };
+  if (props[1].target.id === props[4]) {
+    encodeImageFileAsURL(props[1].target.files[0])
+      .then(
+        (res) =>
+          (newSectionData[props[3]][props[2]][props[1].target.name] = res)
+      )
+      .catch((err) => console.log(err));
+  } else {
+    newSectionData[props[3]][props[2]][props[1].target.name] =
+      props[1].target.value;
+  }
+  return newSectionData[props[3]];
+};
+
 export const encodeImageFileAsURL = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
