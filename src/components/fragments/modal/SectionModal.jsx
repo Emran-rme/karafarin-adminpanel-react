@@ -5,10 +5,20 @@ import { translateSectinType } from "../../../utils/helpers/helpers";
 import { Content } from "../../../components";
 import { useEffect } from "react";
 
-const SectionModal = ({ show, close, data, componentName, add, submit }) => {
+const SectionModal = ({
+  setSectionData,
+  show,
+  close,
+  data,
+  componentName,
+  add,
+  submit,
+}) => {
   // useEffect(() => {
   //   return () => {
   //     setSectionData({
+  //       fields: "",
+  //       description: "",
   //       sectionType: "",
   //       servicesItem: [{ link: "", linkName: "", serviceIcon: "" }],
   //       customerItem: [{ name: "", customerIcon: "" }],

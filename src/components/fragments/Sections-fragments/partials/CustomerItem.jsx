@@ -4,7 +4,8 @@ import { adminSectionsContext } from "../../../../services/context/adminSections
 const CustomerItem = () => {
   const { sectionData, removeFormFields, handleOnChange } =
     useContext(adminSectionsContext);
-  return sectionData.customerItem?.map((element, index) => (
+
+    return sectionData.customerItem?.map((element, index) => (
     <div className="row d-flex align-items-center" key={index}>
       <div className="col-md-8 mb-3">
         <label htmlFor="name">نام و نام خانوادگی:</label>
@@ -14,7 +15,7 @@ const CustomerItem = () => {
           name="name"
           className="form-control"
           value={element.name || ""}
-          onChange={(e) => handleOnChange(index, e, "teams")}
+          onChange={(e) => handleOnChange(e, index, "teams")}
         />
         <label htmlFor="customerIcon">تصویر:</label>
         <input
@@ -22,7 +23,7 @@ const CustomerItem = () => {
           id="customerIcon"
           name="customerIcon"
           className="form-control"
-          onChange={(e) => handleOnChange(index, e, "teams")}
+          onChange={(e) => handleOnChange(e, index, "teams")}
         />
       </div>
       <div className="col-md-4 my-4 d-flex align-items-center justify-content-between">

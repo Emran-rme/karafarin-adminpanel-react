@@ -160,6 +160,41 @@ export const adminMenuItem = [
   { id: 8, name: "حساب کاربری", link: "./profile", icon: "mdi-account-cog" },
 ];
 
+// Check the status of the validator
+/*
+ * parameters:
+ * 1- props[0]: query
+ * 2-props[1]: validator,
+ * 3-props[2]: validatorName
+ * 4-props[3]: data
+ */
+export const checkedValidator = (...props) => {
+  switch (props[0]) {
+    case "posts":
+      return props[1].current.message(props[2], props[3], "required");
+    case "about":
+      if (props[2] === "image") {
+        return props[1].current.message(props[2], props[3], "required");
+      } else if (props[2] === "description") {
+        return props[1].current.message(props[2], props[3], "required");
+      }
+    case "teams":
+      if (props[2] === "title") {
+        return props[1].current.message(props[2], props[3], "required");
+      } else if (props[2] === "description") {
+        return props[1].current.message(props[2], props[3], "required");
+      }
+    case "services":
+      if (props[2] === "title") {
+        return props[1].current.message(props[2], props[3], "required");
+      } else if (props[2] === "description") {
+        return props[1].current.message(props[2], props[3], "required");
+      }
+    default:
+      return true;
+  }
+};
+
 export const textEditorOptions = {
   defaultStyle: "font-family: IRANSans; min-height: 300px",
   buttonList: [

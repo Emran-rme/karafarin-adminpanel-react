@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { adminSectionsContext } from "../../../../services/context/adminSectionsContext";
+import { checkedValidator } from "../../../../utils/helpers/helpers";
 
 const Title = () => {
-  const { sectionData, handleOnChange, checkedValidator, searchParams } =
+  const { sectionData, handleOnChange, validator, searchParams } =
     useContext(adminSectionsContext);
   return (
     <div className="col-md-12 mb-3">
@@ -14,9 +15,14 @@ const Title = () => {
         value={sectionData.title || ""}
         onChange={(e) => handleOnChange(e)}
       />
-      {/* {(searchParams.get("type") === "teams" ||
+      {(searchParams.get("type") === "teams" ||
         searchParams.get("type") === "services") &&
-        checkedValidator("title")} */}
+        checkedValidator(
+          searchParams.get("type"),
+          validator,
+          "title",
+          sectionData.title
+        )}
     </div>
   );
 };

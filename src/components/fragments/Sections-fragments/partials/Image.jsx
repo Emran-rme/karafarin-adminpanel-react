@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { adminSectionsContext } from "../../../../services/context/adminSectionsContext";
+import { checkedValidator } from "../../../../utils/helpers/helpers";
 
 const Image = () => {
-  const { checkedValidator, searchParams, handleOnChange } =
+  const { sectionData, searchParams, handleOnChange, validator } =
     useContext(adminSectionsContext);
 
   return (
@@ -15,7 +16,13 @@ const Image = () => {
         className="form-control"
         onChange={(e) => handleOnChange(e)}
       />
-      {/* {searchParams.get("type") === "about" && checkedValidator("image")} */}
+      {searchParams.get("type") === "about" &&
+        checkedValidator(
+          searchParams.get("type"),
+          validator,
+          "image",
+          sectionData.image
+        )}
     </div>
   );
 };

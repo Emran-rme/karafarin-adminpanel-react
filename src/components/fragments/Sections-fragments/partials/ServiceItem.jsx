@@ -15,7 +15,7 @@ const ServiceItem = () => {
           name="link"
           className="form-control"
           value={element.link || ""}
-          onChange={(e) => handleOnChange(index, e, "services")}
+          onChange={(e) => handleOnChange(e, index, "services")}
         />
         <label htmlFor="linkName">عنوان پیوند:</label>
         <input
@@ -24,7 +24,7 @@ const ServiceItem = () => {
           name="linkName"
           className="form-control"
           value={element.linkName || ""}
-          onChange={(e) => handleOnChange(index, e, "services")}
+          onChange={(e) => handleOnChange(e, index, "services")}
         />
         <label htmlFor="serviceIcon">تصویر:</label>
         <input
@@ -32,7 +32,7 @@ const ServiceItem = () => {
           id="serviceIcon"
           name="serviceIcon"
           className="form-control"
-          onChange={(e) => handleOnChange(index, e, "services")}
+          onChange={(e) => handleOnChange(e, index, "services")}
         />
       </div>
       <div className="col-md-4 my-4 d-flex align-items-center justify-content-between">

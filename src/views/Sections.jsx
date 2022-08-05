@@ -75,14 +75,7 @@ const Sections = () => {
     if (searchParams.get("type")) {
       openModal();
     }
-    // return () => {
-    //   setSectionData({
-    //     sectionType: "",
-    //     servicesItem: [{ link: "", linkName: "", serviceIcon: "" }],
-    //     customerItem: [{ name: "", customerIcon: "" }],
-    //   });
-    // };
-  }, [location.search]);
+  }, [location]);
 
   // show or hide modal box
   /*
@@ -103,42 +96,41 @@ const Sections = () => {
         ...currentComponent,
         sectionName: searchParams.get("type") || "",
       });
-      // if (sectionList.length > 0) {
-      //   sectionList.find((section) => {
-      //     if (
-      //       section.type === searchParams.get("type") &&
-      //       section.id === parseInt(searchParams.get("section-id"))
-      //     ) {
-      //       setTitle(section.get_content?.title);
-      //       setDescription(section.get_content?.description);
-      //       setSelectedOptionCategory(
-      //         categoriesOptions.find(
-      //           (category) => category.value === section.get_content?.category
-      //         )
-      //       );
-      //       let serviceItem = [];
-      //       section.get_content?.get_content_files.map((files) =>
-      //         serviceItem.push({
-      //           link: files.link,
-      //           linkName: files.link_name,
-      //           image: config.baseApi + files.image_url,
-      //         })
-      //       );
-      //       setFormValuesServices(serviceItem);
-      //       let customeritem = [];
-      //       section.get_content?.get_content_files.map((files) =>
-      //         customeritem.push({
-      //           name: files.name,
-      //           image: config.baseApi + files.image_url,
-      //         })
-      //       );
-      //       setFormValuesCustomers(customeritem);
-      //     }
-      //   });
-      // }
+      if (sectionList.length > 0) {
+        sectionList.find((section) => {
+          if (
+            section.type === searchParams.get("type") &&
+            section.id === parseInt(searchParams.get("section-id"))
+          ) {
+            let servicesItem = [];
+            let customerItem = [];
+            section.get_content?.get_content_files.map((files) =>
+              servicesItem.push({
+                link: files.link,
+                linkName: files.link_name,
+                serviceIcon: config.baseApi + files.image_url,
+              })
+            );
+            section.get_content?.get_content_files.map((files) =>
+              customerItem.push({
+                name: files.name,
+                customerIcon: config.baseApi + files.image_url,
+              })
+            );
+            setSectionData({
+              fields: sectionChoosor(searchParams.get("type")),
+              sectionType: section.type,
+              title: section.get_content?.title,
+              categoryId: section.get_content?.category,
+              servicesItem: servicesItem,
+              customerItem: customerItem,
+              description: section.get_content?.description,
+            });
+          }
+        });
+      }
     }
   };
-
   const closeModal = (name) => {
     if (name === "create-and-edit") {
       setModalStatus({ ...modalStatus, createAndEdit: false });
@@ -168,7 +160,6 @@ const Sections = () => {
       });
     }
   };
-
   let removeFormFields = (i, sectionName) => {
     if (sectionName === "services") {
       let newServicesItem = [...sectionData.servicesItem];
@@ -186,19 +177,18 @@ const Sections = () => {
       });
     }
   };
-
-  let handleOnChange = (index, event, sectionName = null) => {
-    if (event.target.id === "image") {
+  let handleOnChange = (e, index, sectionName = null) => {
+    if (e.target.id === "image") {
       setSectionData({
         ...sectionData,
-        [event.target.name]: event.target.files[0],
+        [e.target.name]: e.target.files[0],
       });
     } else if (sectionName === "services") {
       setSectionData({
         ...sectionData,
         servicesItem: handleDynamicOnChange(
           sectionData,
-          event,
+          e,
           index,
           "servicesItem",
           "serviceIcon"
@@ -209,7 +199,7 @@ const Sections = () => {
         ...sectionData,
         customerItem: handleDynamicOnChange(
           sectionData,
-          event,
+          e,
           index,
           "customerItem",
           "customerIcon"
@@ -218,14 +208,12 @@ const Sections = () => {
     } else {
       setSectionData({
         ...sectionData,
-        [event.target.name]: event.target.value,
+        [e.target.name]: e.target.value,
       });
     }
   };
 
-  console.log(sectionData);
   // create new sections
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validator.current.allValid()) {
@@ -244,74 +232,35 @@ const Sections = () => {
     dispatch(deleteSection(sectionId, closeModal));
   };
 
-  // Check the status of the validator
-  // const checkedValidator = (validatorName) => {
-  //   switch (searchParams.get("type")) {
-  //     case "posts":
-  //       return validator.current.message(
-  //         validatorName,
-  //         selectedOptionCategory,
-  //         "required"
-  //       );
-  //     case "about":
-  //       if (validatorName === "image") {
-  //         return validator.current.message(validatorName, image, "required");
-  //       } else if (validatorName === "description") {
-  //         return validator.current.message(
-  //           validatorName,
-  //           description,
-  //           "required"
-  //         );
-  //       }
-  //     case "teams":
-  //       if (validatorName === "title") {
-  //         return validator.current.message(validatorName, title, "required");
-  //       } else if (validatorName === "description") {
-  //         return validator.current.message(
-  //           validatorName,
-  //           description,
-  //           "required"
-  //         );
-  //       }
-  //     case "services":
-  //       if (validatorName === "title") {
-  //         return validator.current.message(validatorName, title, "required");
-  //       } else if (validatorName === "description") {
-  //         return validator.current.message(
-  //           validatorName,
-  //           description,
-  //           "required"
-  //         );
-  //       }
-  //     default:
-  //       return true;
-  //   }
-  // };
-
   const handleContentSubmit = (event) => {
     event.preventDefault();
     if (validator.current.allValid()) {
-      // let formData = new FormData();
-      // formData.append("section_id", searchParams.get("section-id"));
-      // if (sectionData.title) formData.append("title", sectionData.title);
-      // if (sectionData.description)
-      //   formData.append("description", sectionData.description);
-      // if (sectionData.categoryId)
-      //   formData.append("category", sectionData.categoryId);
-      // if (sectionData.image)
-      //   formData.append("image", event.target.image.files[0]);
-      // if (sectionData.formValuesServices.length > 0)
-      //   formData.append("serviceItem", JSON.stringify(formValuesServices));
-      // if (sectionData.formValuesCustomers.length > 0)
-      //   formData.append("customerItem", JSON.stringify(formValuesCustomers));
-      // dispatch(
-      //   contentsForSections(
-      //     searchParams.get("section-id"),
-      //     searchParams.get("type"),
-      //     formData,
-      //     closeModal
-      //   )
-      // );
+      let formData = new FormData();
+      formData.append("section_id", searchParams.get("section-id"));
+      sectionData.title && formData.append("title", sectionData.title);
+      sectionData.description &&
+        formData.append("description", sectionData.description);
+      sectionData.categoryId &&
+        formData.append("category", sectionData.categoryId);
+      sectionData.image && formData.append("image", sectionData.image);
+      sectionData.servicesItem.length > 0 &&
+        formData.append(
+          "serviceItem",
+          JSON.stringify(sectionData.servicesItem)
+        );
+      sectionData.customerItem.length > 0 &&
+        formData.append(
+          "customerItem",
+          JSON.stringify(sectionData.customerItem)
+        );
+      dispatch(
+        contentsForSections(
+          searchParams.get("section-id"),
+          searchParams.get("type"),
+          formData,
+          closeModal
+        )
+      );
     } else {
       validator.current.showMessages();
       forceUpdate(1);
@@ -336,7 +285,6 @@ const Sections = () => {
           handleOnChange,
           handleSubmit,
           removeFormFields,
-          // checkedValidator,
           searchParams,
         }}
       >
@@ -363,6 +311,7 @@ const Sections = () => {
           componentName={currentComponent.sectionName}
           add={addFormFields}
           submit={handleContentSubmit}
+          // setSectionData={setSectionData}
         />
       </adminSectionsContext.Provider>
     </div>
