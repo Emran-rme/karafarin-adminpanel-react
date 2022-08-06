@@ -32,11 +32,12 @@ const PagesTable = ({ pages, open, category, location, searchParams }) => {
               <td className="align-middle table-title">{page.page_title}</td>
               <td className="align-middle table-post-cat">
                 <span className="btn btn-outline-success btn-sm disabled">
+                  {console.log(category)}
                   {!isEmpty(category) &&
                     category.find(
                       (cat) =>
-                        parseInt(cat.value) === parseInt(page.category_id).label
-                    )}
+                        parseInt(cat.value) === parseInt(page.category_id)
+                    ).label}
                 </span>
               </td>
               <td className="align-middle">

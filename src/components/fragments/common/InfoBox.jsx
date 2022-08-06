@@ -11,7 +11,7 @@ const InfoBox = ({
   icon,
 }) => {
   return (
-    <div className="col-3 p-2 ">
+    <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2 ">
       <div className="main-page__box">
         <span className={`right-icon ${color}`} />
         <div className="d-flex flex-column justify-content-between align-items-center">

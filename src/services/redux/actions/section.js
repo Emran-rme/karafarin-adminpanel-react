@@ -95,7 +95,7 @@ export const contentsForSections = (sectionId, sectionType, content, close) => {
         content
       );
       if (status === 200) {
-        close("create-and-edit");
+        close();
         successMessage(data.message);
         dispatch(getAllSections());
       }

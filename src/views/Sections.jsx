@@ -40,11 +40,7 @@ const Sections = () => {
     componentName: "SECTION_FORM",
     sectionName: "",
   });
-  const [sectionData, setSectionData] = useState({
-    sectionType: "",
-    servicesItem: [{ link: "", linkName: "", serviceIcon: "" }],
-    customerItem: [{ name: "", customerIcon: "" }],
-  });
+  const [sectionData, setSectionData] = useState({});
 
   const [, forceUpdate] = useState();
 
@@ -52,12 +48,6 @@ const Sections = () => {
   const dispatch = useDispatch();
   const sectionList = useSelector((state) => state.sections);
   const categoriesList = useSelector((state) => state.categories);
-
-  useEffect(() => {
-    if (isEmpty(sectionList)) {
-      dispatch(getAllSections());
-    }
-  }, []);
 
   //path and location
   const location = useLocation();
@@ -68,10 +58,9 @@ const Sections = () => {
   const validator = useRef(reactValidator());
 
   useEffect(() => {
-    setSectionData({
-      ...sectionData,
-      fields: sectionChoosor(searchParams.get("type")),
-    });
+    if (isEmpty(sectionList)) {
+      dispatch(getAllSections());
+    }
     if (searchParams.get("type")) {
       openModal();
     }
@@ -96,6 +85,7 @@ const Sections = () => {
         ...currentComponent,
         sectionName: searchParams.get("type") || "",
       });
+      //update current section data
       if (sectionList.length > 0) {
         sectionList.find((section) => {
           if (
@@ -120,11 +110,15 @@ const Sections = () => {
             setSectionData({
               fields: sectionChoosor(searchParams.get("type")),
               sectionType: section.type,
-              title: section.get_content?.title,
-              categoryId: section.get_content?.category,
-              servicesItem: servicesItem,
-              customerItem: customerItem,
-              description: section.get_content?.description,
+              title: section.get_content?.title || "",
+              categoryId: section.get_content?.category || "",
+              servicesItem: !isEmpty(servicesItem)
+                ? servicesItem
+                : [{ link: "", linkName: "", serviceIcon: "" }],
+              customerItem: !isEmpty(customerItem)
+                ? customerItem
+                : [{ name: "", customerIcon: "" }],
+              description: section.get_content?.description || "",
             });
           }
         });
@@ -311,7 +305,6 @@ const Sections = () => {
           componentName={currentComponent.sectionName}
           add={addFormFields}
           submit={handleContentSubmit}
-          // setSectionData={setSectionData}
         />
       </adminSectionsContext.Provider>
     </div>

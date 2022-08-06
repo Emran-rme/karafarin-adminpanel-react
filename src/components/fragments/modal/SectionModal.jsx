@@ -3,28 +3,8 @@ import "@reach/dialog/styles.css";
 import { isEmpty } from "lodash";
 import { translateSectinType } from "../../../utils/helpers/helpers";
 import { Content } from "../../../components";
-import { useEffect } from "react";
 
-const SectionModal = ({
-  setSectionData,
-  show,
-  close,
-  data,
-  componentName,
-  add,
-  submit,
-}) => {
-  // useEffect(() => {
-  //   return () => {
-  //     setSectionData({
-  //       fields: "",
-  //       description: "",
-  //       sectionType: "",
-  //       servicesItem: [{ link: "", linkName: "", serviceIcon: "" }],
-  //       customerItem: [{ name: "", customerIcon: "" }],
-  //     });
-  //   };
-  // }, []);
+const SectionModal = ({ show, close, data, componentName, add, submit }) => {
   return (
     <DialogOverlay isOpen={show} onDismiss={close}>
       <DialogContent

@@ -2476,9 +2476,8 @@ header {
 
 /*======admin panel========*/
 .content {
-  height: 100vh;
   padding: 1rem 0;
-  width: 80%;
+  width: 100%;
 }
 
 .content-body {
@@ -2492,10 +2491,11 @@ header {
 }
 
 .side-nav {
-  width: 230px;
-  padding-right: 1.25rem;
+  position: absolute;
   padding-bottom: 4rem;
   overflow-x: hidden;
+  left: 0;
+  width: 100%;
 }
 
 .side-nav .side-nav__devider {
@@ -3739,6 +3739,9 @@ table .table-img > img {
 
 /*======responcive========*/
 @media (min-width: 320px) and (max-width: 576px) {
+  body {
+    overflow-y: auto;
+  }
   .top-banner-mobile {
     height: 60px;
     display: block;
@@ -3747,8 +3750,18 @@ table .table-img > img {
   .top-banner-mobile img {
     width: 100%;
   }
-
   .top-banner {
+    display: none;
+  }
+  .side-nav {
+    position: static;
+    padding-bottom: 0;
+  }
+  .bg-page > .container-fluid {
+    overflow: auto;
+    height: 100vh;
+  }
+  .side-nav > ul {
     display: none;
   }
 
@@ -3854,6 +3867,17 @@ table .table-img > img {
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
+  .side-nav {
+    position: static;
+    padding-bottom: 0;
+  }
+  .bg-page > .container-fluid {
+    overflow: auto;
+    height: 100vh;
+  }
+  .side-nav > ul {
+    display: none;
+  }
   .top-banner-mobile {
     height: 60px;
     display: block;

@@ -42,22 +42,22 @@ const LineChart = ({ data: chartData }) => {
     Legend
   );
 
-  const labels = chartData?.map((item) =>
-    new Date(item.visit_date).toLocaleDateString("fa-IR")
-  );
+  const labels = chartData
+    ?.map((item) => new Date(item.visit_date).toLocaleDateString("fa-IR"))
+    .reverse();
 
   const data = {
     labels,
     datasets: [
       {
         label: "بازدید کل",
-        data: chartData?.map((item) => item.total_hits),
+        data: chartData?.map((item) => item.total_hits).reverse(),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
       {
         label: "بازدید یکتا",
-        data: chartData?.map((item) => item.total_ip),
+        data: chartData?.map((item) => item.total_ip).reverse(),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

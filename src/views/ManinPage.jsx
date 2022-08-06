@@ -47,7 +47,7 @@ const MainPage = () => {
   }, [categories, pages, visitor]);
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
         <div className="col-12 mt-4">
           <div className="row">
