@@ -5,7 +5,7 @@ const PhoneAndEmail = () => {
   const { inputData: data, handleOnChange } = useContext(adminFooterContext);
 
   return (
-    <div className="col-8 border-top mt-4 ">
+    <div className="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 border-top mt-4 ">
       <label htmlFor="tel" className="mt-4">
         تلفن:
       </label>

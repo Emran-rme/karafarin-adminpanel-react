@@ -11,6 +11,7 @@ const AdminSideNav = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
   useEffect(() => {
     return () => setActive(false);
   }, [location.pathname]);
@@ -19,12 +20,12 @@ const AdminSideNav = () => {
       <div className="d-flex justify-content-between align-items-center pt-3">
         {active ? (
           <span
-            className="mdi mdi-close mdi-36px d-none text-light"
+            className="mdi mdi-close mdi-36px d-none text-dark"
             onClick={() => setActive((prevState) => !prevState)}
           />
         ) : (
           <span
-            className="mdi mdi-menu mdi-36px d-none text-light"
+            className="mdi mdi-menu mdi-36px d-none text-dark"
             onClick={() => setActive((prevState) => !prevState)}
           />
         )}

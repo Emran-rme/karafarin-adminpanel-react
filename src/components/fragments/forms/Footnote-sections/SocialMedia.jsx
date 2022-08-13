@@ -5,7 +5,7 @@ const SocialMedia = () => {
   const { inputData: data, handleOnChange } = useContext(adminFooterContext);
 
   return (
-    <div className="col-8 border-top mt-4 d-flex align-items-center">
+    <div className="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 border-top mt-4 d-flex align-items-center">
       <div className="flex-fill">
         <div className="mt-4">
           <label className="input-label facebook">

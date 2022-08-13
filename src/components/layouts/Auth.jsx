@@ -87,32 +87,34 @@ const Auth = ({ user }) => {
   }
 
   return (
-    <div className="bg-page">
+    <div className="bg-page Auth">
       <div className="Left-design"></div>
       <div className="auth-box">
-        <div className="auth-box__content">
-          <div className="auth-box__content--right">
-            <authContext.Provider
-              value={{
-                loading,
-                location,
-                validator,
-                email,
-                password,
-                confirmPassword,
-                setEmail,
-                setPassword,
-                setConfirmPassword,
-                handleSubmit,
-              }}
-            >
-              <Outlet />
-            </authContext.Provider>
-          </div>
-          <div className="auth-box__content--left ">
-            <Link to="/">
-              <img src="/assets/images/logo.png" alt="logo" />
-            </Link>
+        <div className="container d-flex justify-content-center">
+          <div className="auth-box__content">
+            <div className="auth-box__content--right">
+              <authContext.Provider
+                value={{
+                  loading,
+                  location,
+                  validator,
+                  email,
+                  password,
+                  confirmPassword,
+                  setEmail,
+                  setPassword,
+                  setConfirmPassword,
+                  handleSubmit,
+                }}
+              >
+                <Outlet />
+              </authContext.Provider>
+            </div>
+            <div className="auth-box__content--left ">
+              <Link to="/">
+                <img src="/assets/images/logo.png" alt="logo" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

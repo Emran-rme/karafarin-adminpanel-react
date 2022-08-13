@@ -112,7 +112,7 @@ const Footer = () => {
     <div className="footer-page">
       <PageInfo title="مدیریت فوتر" />
       <div className="row">
-        <div className="col-4 d-flex flex-column border-start">
+        <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex flex-column border-start">
           {footerOptions.map((item) => (
             <button
               key={item.itemId}
@@ -127,7 +127,7 @@ const Footer = () => {
             </button>
           ))}
         </div>
-        <div className="col-8">
+        <div className="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
           <adminFooterContext.Provider
             value={{
               inputData,

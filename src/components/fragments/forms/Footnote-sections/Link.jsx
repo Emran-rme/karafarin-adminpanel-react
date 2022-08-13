@@ -11,7 +11,7 @@ const Link = () => {
 
   return (
     <>
-      <div className="col-8">
+      <div className="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
         <label htmlFor="secondPartTitle">عنوان: </label>
         <input
           type="text"
@@ -24,7 +24,7 @@ const Link = () => {
       </div>
       {data.link?.map((element, i) => (
         <div
-          className="col-8 border-top mt-4 d-flex align-items-center"
+          className="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 border-top mt-4 d-flex align-items-center"
           key={i}
         >
           <div className="flex-fill">
