@@ -18,17 +18,13 @@ const AdminSideNav = () => {
   return (
     <nav className="side-nav">
       <div className="d-flex justify-content-between align-items-center pt-3">
-        {active ? (
-          <span
-            className="mdi mdi-close mdi-36px d-none text-dark"
-            onClick={() => setActive((prevState) => !prevState)}
-          />
-        ) : (
-          <span
-            className="mdi mdi-menu mdi-36px d-none text-dark"
-            onClick={() => setActive((prevState) => !prevState)}
-          />
-        )}
+        <span
+          className={`mdi ${
+            active ? "mdi-close" : "mdi-menu"
+          } mdi-36px d-none text-dark`}
+          onClick={() => setActive((prevState) => !prevState)}
+        />
+
         <Link to="/" className="intro-x d-flex justify-content-center">
           <img src="/assets/images/logo.png" alt="logo" />
         </Link>
